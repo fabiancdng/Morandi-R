@@ -27,6 +27,7 @@ This project is based on the idea [this repository](https://github.com/fabiancdn
 ## Credits  
 - Morandi uses some third party libraries:  
     + [discord.py](https://github.com/Rapptz/discord.py)
+    + [discord-ext-ipc] (https://github.com/Ext-Creators/discord-ext-ipc)
     + [pymysql](https://github.com/PyMySQL/PyMySQL)
   
 - If you find a bug or something else not mentioned in this readme/in the wiki, you can open a new issue/pull request!
