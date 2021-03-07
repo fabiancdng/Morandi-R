@@ -1,9 +1,10 @@
-import discord
-import config
-import time
-from utils import database
 import os
-from discord.ext import commands
+import time
+import discord
+from discord.ext import commands, tasks, ipc
+import config
+from utils import database
+
 
 async def get_server_prefix(bot, message):
     if message.guild:
@@ -12,8 +13,18 @@ async def get_server_prefix(bot, message):
     else:
         return "."
 
+class Bot(commands.Bot):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args,**kwargs)
+        self.ipc = ipc.Server(self, secret_key = config.ipc_key)
 
-bot = commands.Bot(command_prefix=get_server_prefix)
+    async def on_ipc_ready(self):
+        print(">>> IPC server ready.")
+
+    async def on_ipc_error(self, endpoint, error):
+        print(endpoint, "raised", error)
+
+bot = Bot(command_prefix=get_server_prefix)
 
 @bot.event
 async def on_ready():
@@ -30,4 +41,5 @@ for file in os.listdir("./modules"):
         print(f"'{file}' has been loaded successfully.")
         bot.load_extension(f"modules.{file[:-3]}")
 
+bot.ipc.start()
 bot.run(config.token)

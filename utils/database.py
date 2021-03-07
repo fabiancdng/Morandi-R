@@ -19,7 +19,7 @@ def setup_database():
     db.commit()
     cursor.close()
     db.close()
-    print("Initialized MySQL database.")
+    print(">>> Initialized MySQL database.")
 
 def get_config(guild_id):
     db = pymysql.connect(
