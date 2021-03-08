@@ -2,17 +2,18 @@ import pymysql
 import config
 import time
 
-def setup_database():
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
+db_args = {
+    "host": config.mysql["host"],
+    "port": config.mysql["port"],
+    "user": config.mysql["user"],
+    "password": config.mysql["pass"],
+    "database": config.mysql["db"],
+    "charset": 'utf8mb4',
+    "cursorclass": pymysql.cursors.DictCursor
+}
 
+def setup_database():
+    db = pymysql.connect(**db_args)
     cursor = db.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS `configs` (`id` INT NOT NULL AUTO_INCREMENT, `guild_id` BIGINT, `prefix` VARCHAR(5), PRIMARY KEY (`id`));")
     cursor.execute("CREATE TABLE IF NOT EXISTS `leveling` (`id` INT NOT NULL AUTO_INCREMENT, `guild_id` BIGINT, `user_id` BIGINT, `xp` BIGINT, `level` INT, PRIMARY KEY (`id`));")
@@ -22,16 +23,7 @@ def setup_database():
     print(">>> Initialized MySQL database.")
 
 def get_config(guild_id):
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-
+    db = pymysql.connect(**db_args)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM `configs` WHERE guild_id = '%s';", (guild_id))
     conf = cursor.fetchall()
@@ -48,17 +40,27 @@ def get_config(guild_id):
         db.close()
         return conf
 
-def get_user_xp(guild_id, user_id):
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
+def change_config(guild_id, item, value):
+    db = pymysql.connect(**db_args)
+    cursor = db.cursor()
+    cursor.execute("UPDATE `configs` SET `%s`=%s WHERE guild_id = '%s';", (item, value, guild_id))
+    conf = cursor
+    print(conf)
+    if len(conf) > 0:
+        cursor.close()
+        db.close()
+        return conf[0]
+    else:
+        print(f"{guild_id}'s config has been created.")
+        cursor.execute("INSERT INTO `configs` VALUES (0, %s, '.');", (guild_id))
+        conf = {'id': db.insert_id(), 'guild_id': guild_id, 'prefix': '.'}
+        db.commit()
+        cursor.close()
+        db.close()
+        return conf
 
+def get_user_xp(guild_id, user_id):
+    db = pymysql.connect(**db_args)
     cursor = db.cursor()
     cursor.execute(f"SELECT * FROM `leveling` WHERE `guild_id` = {guild_id} AND user_id = {user_id}")
     result = cursor.fetchall()
@@ -77,16 +79,7 @@ def get_user_xp(guild_id, user_id):
         return user_xp
 
 def add_user_xp(guild_id, user_id, xp_to_add):
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-
+    db = pymysql.connect(**db_args)
     current_xp = get_user_xp(guild_id, user_id)["xp"]
     updated_xp = current_xp + xp_to_add
 
@@ -101,16 +94,7 @@ def add_user_xp(guild_id, user_id, xp_to_add):
     return updated_xp
 
 def get_user_level(guild_id, user_id):
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-
+    db = pymysql.connect(**db_args)
     cursor = db.cursor()
     cursor.execute(f"SELECT * FROM `leveling` WHERE `guild_id` = {guild_id} AND`user_id` = {user_id}")
     result = cursor.fetchall()
@@ -122,19 +106,11 @@ def get_user_level(guild_id, user_id):
         return False
 
 def user_level_up(guild_id, user_id):
-    db = pymysql.connect(
-        host=config.mysql["host"],
-        port=config.mysql["port"],
-        user=config.mysql["user"],
-        password=config.mysql["pass"],
-        database=config.mysql["db"],
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-
+    db = pymysql.connect(**db_args)
     cursor = db.cursor()
     cursor.execute(f"UPDATE `leveling` SET `level` = `level` + 1")
     db.commit()
     cursor.close()
     db.close()
     return True
+

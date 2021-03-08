@@ -8,12 +8,18 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="/public/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="/public/materialize/extras/noUiSlider/nouislider.css">
     <link rel="stylesheet" href="/public/style.css">
+    <style>
+        h4 {
+            margin-top: 50px !important;
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo" style="margin-left: 15px;">Morandi</a>
+            <a href="#" class="brand-logo left" style="margin-left: 15px;">Morandi</a>
             <ul id="nav-mobile" class="right">
                 <li>
                     <a class="dropdown-trigger valign-wrapper" href="#!" data-target="userDropdown">
@@ -31,36 +37,42 @@
     </ul>
 
     <div class="center">
-        <h2>Add Morandi to your server</h2>
-        <h5>You can add Morandi to following servers:</h5>
+        <h2>Leveling</h2>
+        <h5>Change your preferences for the leveling system.</h5>
     </div>
 
-    <div class="row container">
-        {% for guild in mutual_guilds %}
-            <div class="col m4 center">
-                <div class="guild">
-                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
-                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
-                    <a href="/dashboard/{{ guild.id }}" class="waves-effect waves-light btn">dashboard</a>
-                </div>
+    <div class="container center">
+        <div id="panel">
+            <h4>Leveling system</h4>
+            <div class="switch">
+                <label>
+                    Disabled
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    Enabled
+                </label>
             </div>
-        {% endfor %}
 
-        {% for guild in admin_guilds %}
-            <div class="col m4 center">
-                <div class="guild">
-                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
-                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
-                    <a target="_blank" href="https://discord.com/oauth2/authorize?client_id={{ config.discord_client_id }}&scope=bot&permissions=8" class="waves-effect waves-light btn invite">invite</a>
-                </div>
-            </div>
-        {% endfor %}
+            <h4>XP rate</h4>
+            <p>The bot will give users <span id="xp-amount"></span> XP each minute they message.</p>
+            <div id="xp-slider"></div>
+        </div>
     </div>
     
     <script src="/public/jquery.min.js"></script>
     <script src="/public/materialize/js/materialize.min.js"></script>
+    <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
     <script>
         $(".dropdown-trigger").dropdown({constrainWidth: false});
+        var slider = document.getElementById('xp-slider');
+        noUiSlider.create(slider, {
+            start: [20, 80],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 100
+            }
+        });
     </script>
 </body>
 </html>
