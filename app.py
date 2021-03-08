@@ -16,7 +16,7 @@ async def get_server_prefix(bot, message):
 class Bot(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args,**kwargs)
-        self.ipc = ipc.Server(self, secret_key = config.ipc_key)
+        self.ipc = ipc.Server(self, secret_key=config.ipc_key)
 
     async def on_ipc_ready(self):
         print(">>> IPC server ready.")

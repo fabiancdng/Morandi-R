@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morandi Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="public/materialize/css/materialize.min.css">
+    <style>
+        body {
+            background-color: #2C2F33;
+            color: #fff;
+        }
+
+        div.nav-wrapper {
+            background-color: #7289DA;
+        }
+
+        a {
+            background-color: #7289DA !important;
+        }
+
+        img {
+            width: 100% !important;
+            height: auto;
+        }
+
+        .guild {
+            width: 90%;
+            padding: 20px 0px 20px 0px !important;
+            background-color: #23272A !important;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .guild img {
+            width: 50% !important;
+        }
+
+        .invite {
+            background-color: #99AAB5 !important;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Morandi</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="center">
+        <h2>Add Morandi to your server</h2>
+        <h5>You can add Morandi to following servers:</h5>
+    </div>
+
+    <div class="row container">
+        {% for guild in mutual_guilds %}
+            <div class="col m4 center">
+                <div class="guild">
+                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
+                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
+                    <a class="waves-effect waves-light btn">dashboard</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for guild in owned_guilds %}
+            <div class="col m4 center">
+                <div class="guild">
+                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
+                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
+                    <a class="waves-effect waves-light btn invite">invite</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <script src="public/jquery.min.js"></script>
+    <script src="public/materialize/js/materialize.min.js"></script>
+</body>
+</html>

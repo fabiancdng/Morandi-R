@@ -1,23 +1,49 @@
-from flask import Flask, render_template, request, session
-import oauth
+import config
+from quart import Quart, render_template, request, session, redirect, url_for
+from quart_discord import DiscordOAuth2Session
+from discord.ext import ipc
 
-app = Flask(__name__, static_folder="web/public", template_folder="web/templates")
-app.config["SECRET_KEY"] = "owALkS5wbEkNpyk8u"
+app = Quart(__name__, static_folder="web/public", template_folder="web/templates")
+ipc_client = ipc.Client(secret_key=config.ipc_key)
+
+app.config["SECRET_KEY"] = config.secret_key
+app.config["DISCORD_CLIENT_ID"] = config.discord_client_id
+app.config["DISCORD_CLIENT_SECRET"] =  config.discord_client_secret
+app.config["DISCORD_REDIRECT_URI"] = config.discord_redirect_uri
+
+discord = DiscordOAuth2Session(app)
 
 @app.route("/")
-def home():
-    return render_template("index.html", discord_url=oauth.discord_login_url)
+async def home():
+    return await render_template("index.html")
 
 @app.route("/login")
-def login():
-    oauth_code = request.args["code"]
-    access_token = oauth.get_access_token(oauth_code)
-    session["token"] = access_token
-    
-    user = oauth.get_user(access_token)
-    user_name = user["username"]
-    user_id = user["discriminator"]
+async def login():
+    return await discord.create_session()
 
-    return user_name + user_id
+@app.route("/callback")
+async def callback():
+    try:
+        await discord.callback()
+    except:
+        return redirect(url_for("login"))
+    
+    user = await discord.fetch_user()
+    return f"{user}"
+
+@app.route("/dashboard")
+async def dashboard():
+    guild_ids = await ipc_client.request("get_mutual_guilds")
+    user_guilds = await discord.fetch_guilds()
+    owned_guilds = []
+    mutual_guilds = []
+
+    for guild in user_guilds:
+        if guild.is_owner == True and guild.id not in guild_ids:
+            owned_guilds.append(guild)
+        elif guild.is_owner == True and guild.id in guild_ids:
+            mutual_guilds.append(guild)
+
+    return await render_template("dashboard.html", owned_guilds=owned_guilds, mutual_guilds=mutual_guilds)
 
 app.run("127.0.0.1", 5000)
