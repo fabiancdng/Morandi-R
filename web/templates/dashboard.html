@@ -43,17 +43,33 @@
             background-color: #99AAB5 !important;
         }
 
+        ul#userDropdown a {
+            background-color: #23272A !important;
+            color: #fff !important;
+        }
+
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Morandi</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a></a></li>
+            <a href="#" class="brand-logo" style="margin-left: 15px;">Morandi</a>
+            <ul id="nav-mobile" class="right">
+                <li>
+                    <a class="dropdown-trigger valign-wrapper" href="#!" data-target="userDropdown">
+                        <img class="circle" style="width: 20% !important; margin-right: 5px;" src="{{ user.avatar_url }}">
+                        <span>{{ user.username }} <i class="material-icons right">arrow_drop_down</i></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
+
+    <ul id="userDropdown" class="dropdown-content" style="width: 200px !important;">
+        <li><a style="width: 200px !important;" href="/dashboard"><span class="material-icons">dns</span> My servers</a></li>
+        <li><a style="width: 200px !important;" href="/logout"><span class="material-icons">logout</span> Logout</a></li>
+    </ul>
+
     <div class="center">
         <h2>Add Morandi to your server</h2>
         <h5>You can add Morandi to following servers:</h5>
@@ -83,5 +99,8 @@
     
     <script src="public/jquery.min.js"></script>
     <script src="public/materialize/js/materialize.min.js"></script>
+    <script>
+        $(".dropdown-trigger").dropdown({constrainWidth: false});
+    </script>
 </body>
 </html>

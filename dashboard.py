@@ -15,7 +15,11 @@ discord = DiscordOAuth2Session(app)
 
 @app.route("/")
 async def home():
-    return await render_template("index.html")
+    authorized = await discord.authorized
+    if authorized == True:
+        return redirect("/dashboard")
+    else:
+        return await render_template("index.html")
 
 @app.route("/login")
 async def login():
@@ -28,13 +32,17 @@ async def callback():
     except:
         return redirect(url_for("login"))
     
-    user = await discord.fetch_user()
-    return f"{user}"
+    return redirect("/dashboard")
 
 @app.route("/dashboard")
 async def dashboard():
+    authorized = await discord.authorized
+    if authorized != True:
+        return redirect("/")
+    
     guild_ids = await ipc_client.request("get_mutual_guilds")
     user_guilds = await discord.fetch_guilds()
+    user = await discord.fetch_user()
     owned_guilds = []
     mutual_guilds = []
 
@@ -44,6 +52,11 @@ async def dashboard():
         elif guild.is_owner == True and guild.id in guild_ids:
             mutual_guilds.append(guild)
 
-    return await render_template("dashboard.html", owned_guilds=owned_guilds, mutual_guilds=mutual_guilds)
+    return await render_template("dashboard.html", owned_guilds=owned_guilds, mutual_guilds=mutual_guilds, user=user)
+
+@app.route("/logout")
+async def logout():
+    discord.revoke()
+    return redirect("/")
 
 app.run("127.0.0.1", 5000)
