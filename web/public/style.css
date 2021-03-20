@@ -3,6 +3,17 @@ body {
     color: #fff;
 }
 
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: #23272A;
+}
+
 div.nav-wrapper {
     background-color: #7289DA;
 }
@@ -51,14 +62,6 @@ a.module div.guild {
 
 a.module div.guild:hover {
     transform: scale(1.1);
-}
-
-div#panel {
-    background-color: #23272A !important;
-    border-radius: 20px;
-    margin-top: 30px;
-    text-align: left;
-    padding: 10px 30px;
 }
 
 ul#userDropdown a {

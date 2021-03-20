@@ -69,11 +69,11 @@ Morandi uses some third party libraries:
 * [discord.py](https://github.com/Rapptz/discord.py)
 * [discord-ext-ipc](https://github.com/Ext-Creators/discord-ext-ipc)
 * [pymysql](https://github.com/PyMySQL/PyMySQL)
-* [Quart](https://github.com/xutaoding/quart)
-* [Quart-Discord](https://github.com/jnawk/Quart-Discord)
 ### Web Dashoard
 * [Materialize](https://materializecss.com/)
 * [jQuery](https://jquery.com/)
+* [Quart](https://github.com/xutaoding/quart)
+* [Quart-Discord](https://github.com/jnawk/Quart-Discord)
 
 <br>
 

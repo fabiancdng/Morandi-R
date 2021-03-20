@@ -40,29 +40,17 @@
     </ul>
 
     <div class="flex-center">
-        <h2>Leveling</h2>
-        <h5>Change your preferences for the leveling system.</h5>
+        <h2>Bot Settings</h2>
+        <h5>Change your preferences for the bot's behavior.</h5>
 
         <div class="card" style="width: 60%;">
             <div class="card-content white-text">
-                <span class="card-title">Leveling system <span class="badge red white-text">WIP</span></span>
-                <div class="switch">
-                    <label>
-                        Disabled
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        Enabled
-                    </label>
+                <span class="card-title">Prefix <span class="badge red white-text">WIP</span></span>
+                <div class="input-field">
+                    <input id="prefix" type="text" class="validate white-text" maxlength="5">
+                    <label for="prefix">Prefix</label><br>
+                    <a class="waves-effect waves-light btn">save</a>
                 </div>
-            </div>
-        </div>
-
-        <div class="card" style="width: 60%;">
-            <div class="card-content white-text">
-                <span class="card-title">XP rate <span class="badge red white-text">WIP</span></span>
-                <p>The bot will give users this amount of XP each minute they message.</p><br>
-                <div id="xp-slider"></div><br>
-                <a class="waves-effect waves-light btn">save</a>
             </div>
         </div>
 
@@ -71,16 +59,6 @@
     <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
     <script>
         $(".dropdown-trigger").dropdown({ constrainWidth: false });
-        var slider = document.getElementById('xp-slider');
-        noUiSlider.create(slider, {
-            start: [20, 80],
-            connect: true,
-            range: {
-                'min': 0,
-                'max': 100
-            }
-        });
     </script>
 </body>
-
 </html>
