@@ -1,0 +1,21 @@
+mysql = {
+    "host": "",
+    "port": 3306,
+    "user": "",
+    "pass": "",
+    "db": ""
+}
+
+# Your discord bot token
+token = ""
+
+# A secret key used by the dashboard to communicate with the bot user
+# Can be a totally random string
+ipc_key = "D7TLEGcdu4zJCAv7F"
+
+# Discord OAuth credentials for handling dashboard logins
+# For the 'secret_key' just use any random string
+secret_key = ""
+discord_client_id = 0
+discord_client_secret = ""
+discord_redirect_uri = ""

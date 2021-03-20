@@ -22,11 +22,11 @@ async def home():
     else:
         return await render_template("index.html")
 
-@app.route("/login")
+@app.route("/login/")
 async def login():
     return await discord.create_session()
 
-@app.route("/callback")
+@app.route("/callback/")
 async def callback():
     try:
         await discord.callback()
