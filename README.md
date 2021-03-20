@@ -38,10 +38,25 @@ Morandi can be used in unlimited servers concurrently.
 
 <br>
 
+## How to set up Morandi
+Currently, there is no hosted version of Morandi available. If you'd like to use the bot, you'll have to host it yourself using the guide below.
+### Self-hosting guide
+1. Install the dependencies
+    + [Linux, macOS, etc.] ```python3 -m pip install pymysql discord.py discord-ext-ipc quart quart-discord```
+    + [Windows] ```pip install pymysql discord.py discord-ext-ipc quart quart-discord```
+2. Run the discord bot (from the direction the bot is installed in)
+    + [Linux, macOS, etc.] ```python3 app.py```
+    + [Windows] ```python app.py```
+3. Run the web dashboard (in a new terminal/console) [optional]
+    + [Linux, macOS, etc.] ```python3 dashboard.py```
+    + [Windows] ```python dashboard.py```
+
+<br>
+
 ## Contributing
-If you'd like to help develop Morandi, I highly encourage you to do so!
-Contributions can be made using Pull requests.
-If you have any suggestions / feature requests, you may use the 'Issues' tab to submit them.
+* If you'd like to help develop Morandi, I highly encourage you to do so!
+* Contributions can be made using Pull requests.
+* If you have any suggestions / feature requests, you may use the 'Issues' tab to submit them.
 
 <br>
 
@@ -51,6 +66,8 @@ Morandi uses some third party libraries:
 * [discord.py](https://github.com/Rapptz/discord.py)
 * [discord-ext-ipc](https://github.com/Ext-Creators/discord-ext-ipc)
 * [pymysql](https://github.com/PyMySQL/PyMySQL)
+* [Quart](https://github.com/xutaoding/quart)
+* [Quart-Discord](https://github.com/jnawk/Quart-Discord)
 ### Web Dashoard
 * [Materialize](https://materializecss.com/)
 * [jQuery](https://jquery.com/)
