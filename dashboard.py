@@ -68,8 +68,8 @@ async def guild_dashboard(guild_id):
         if guild.id == int(guild_id):
             return await render_template("guild-dashboard.html", guild=guild, user=user, modules=modules)
 
-@app.route("/dashboard/<guild_id>/leveling")
-async def guild_dashboard_leveling(guild_id):
+@app.route("/dashboard/<guild_id>/<module>")
+async def guild_dashboard_leveling(guild_id, module):
     authorized = await discord.authorized
     if authorized != True:
         return redirect("/")
@@ -79,7 +79,7 @@ async def guild_dashboard_leveling(guild_id):
 
     for guild in guilds:
         if guild.id == int(guild_id):
-            return await render_template("leveling.html", guild=guild, user=user)
+            return await render_template(f"{module}.html", guild=guild, user=user)
     
     return redirect("/")
 
@@ -88,4 +88,4 @@ async def logout():
     discord.revoke()
     return redirect("/")
 
-app.run("127.0.0.1", 5000)
+app.run("127.0.0.1", 5000, debug=True)
