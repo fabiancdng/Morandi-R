@@ -18,11 +18,11 @@ This project is based on the idea [this repository](https://github.com/fabiancdn
 ### Multi-server support
 Morandi can be used in unlimited servers concurrently.
 
-![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/guild-dashboard.png?raw=true)
+![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/guild-dashboard.png?raw=true)
 
 ### **[WIP]** Web dashboard
 
-![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/dashboard.png?raw=true)
+![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/dashboard.png?raw=true)
 
 * Configuration of the bot is made thorugh a web interface instead of a 'config' commands or something
 * Leadberboard of the XP and level system
