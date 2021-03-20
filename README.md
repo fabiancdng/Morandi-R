@@ -41,16 +41,16 @@ Morandi can be used in unlimited servers concurrently.
 ## How to set up Morandi
 Currently, there is no hosted version of Morandi available. If you'd like to use the bot, you'll have to host it yourself using the guide below.
 ### Self-hosting guide
-1. Install the dependencies
+1. **Install the dependencies**
     + [Linux, macOS, etc.] ```python3 -m pip install pymysql discord.py discord-ext-ipc quart quart-discord```
     + [Windows] ```pip install pymysql discord.py discord-ext-ipc quart quart-discord```
-2. Rename 'config.py.template' to 'config.py' and enter your data
+2. **Rename 'config.py.template' to 'config.py' and enter your data**
     + The bot requires a mysql server
     + The bot requires a discord client and bot user - [guide](https://discordpy.readthedocs.io/en/latest/discord.html)
-3. Run the discord bot (from the direction the bot is installed in)
+3. **Run the discord bot (from the direction the bot is installed in)**
     + [Linux, macOS, etc.] ```python3 app.py```
     + [Windows] ```python app.py```
-4. Run the web dashboard (in a new terminal/console) [optional]
+4. **Run the web dashboard (in a new terminal/console) [optional]**
     + [Linux, macOS, etc.] ```python3 dashboard.py```
     + [Windows] ```python dashboard.py```
 
