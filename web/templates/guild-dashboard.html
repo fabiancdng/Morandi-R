@@ -31,28 +31,19 @@
     </ul>
 
     <div class="center">
-        <h2>Add Morandi to your server</h2>
-        <h5>You can add Morandi to following servers:</h5>
+        <h2>Morandi Dashboard</h2>
+        <h5>Click a module to see and change settings or use functions.</h5>
     </div>
 
     <div class="row container">
-        {% for guild in mutual_guilds %}
+        {% for module in modules %}
             <div class="col m4 center">
-                <div class="guild">
-                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
-                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
-                    <a href="/dashboard/{{ guild.id }}" class="waves-effect waves-light btn">dashboard</a>
-                </div>
-            </div>
-        {% endfor %}
-
-        {% for guild in admin_guilds %}
-            <div class="col m4 center">
-                <div class="guild">
-                    <img style="border-radius: 100%; width: 60%;" src="{{ guild.icon_url }}" onerror="this.onerror=null;this.src='/public/assets/server.png'">
-                    <p style="height: 100%; font-size: 150%;">{{ guild.name }}</p>
-                    <a target="_blank" href="https://discord.com/oauth2/authorize?client_id={{ config.discord_client_id }}&scope=bot&permissions=8" class="waves-effect waves-light btn invite">invite</a>
-                </div>
+                <a class="module" href="/dashboard/{{ guild.id }}/{{ module.url }}">
+                    <div class="guild">
+                        <span class="material-icons">{{ module.icon }}</span>
+                        <p style="height: 100%; font-size: 150%;">{{ module.name }}</p>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     </div>
