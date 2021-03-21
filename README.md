@@ -3,14 +3,14 @@
 
 ---
 
-<p align="center" style="border-radius: 100%;"><img src="https://cdn.discordapp.com/avatars/584108228523065387/f762ac9bbf11dcaa6a1db8b5c6fc358d.png?size=256"></p>
+<p align="center"><img src="https://cdn.discordapp.com/avatars/584108228523065387/f762ac9bbf11dcaa6a1db8b5c6fc358d.png?size=256"></p>
 
 ---
 
 ## What is Morandi?
 **Morandi is a multi-functional discord bot with a web dashboard.**
 I'm working towards making it a multi-talented bot that can help you with almost anything.
-This project is based on the idea [this repository](https://github.com/fabiancdng/Morandi) I created a few years ago. I thought it'd be nice to pick it up but change some of its core ideas and make it more of an 'all-rounder' as well as implementing a web dashboard for (almost) all controls.
+This project is based on the idea [this repository](https://github.com/fabiancdng/Morandi) I created a few years ago. I thought it'd be nice to do a rewrite of it but change some of its core ideas and make it more of an 'all-rounder' as well as implementing a web dashboard for (almost) all controls.
 
 <br>
 
