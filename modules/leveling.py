@@ -37,6 +37,21 @@ class Levling(commands.Cog):
         upated_xp = await add_xp(message.guild.id, message.author.id)
         await adjust_level(message.guild.id, message.author.id, upated_xp, message.channel)
 
+    @commands.command()
+    async def rank(self, ctx):
+        user_xp = database.get_user_xp(ctx.guild.id, ctx.author.id)["xp"]
+        user_progress = int(str(user_xp ** (1/4))[2:4])
+        bar_len = 20
+        filled_len = int(round(bar_len * user_progress / float(100)))
+        bar = '🟦' * filled_len + '⬜' * (bar_len - filled_len)
+        await ctx.send(embed=discord.Embed(color=discord.Color.gold())
+        .add_field(
+            name="Progress",
+            value=bar,
+            inline=False
+        ))
+
+
     
 def setup(bot):
     bot.add_cog(Levling(bot))
