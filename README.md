@@ -10,9 +10,7 @@
 ## What is Morandi?
 **Morandi is a multi-functional discord bot with a web dashboard.**
 I'm working towards making it a multi-talented bot that can help you with almost anything.
-This project is based on the idea [this repository](https://github.com/fabiancdng/Morandi) I created a few years ago. I thought it'd be nice to pick it up but change some of its core ideas and make it more of an 'all-rounder' as well as implementing a web dashboard for (almost) all controls.
-
-[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+This project is based on the idea [this repository](https://github.com/fabiancdng/Morandi) I created a few years ago. I thought it'd be nice to do a rewrite of it but change some of its core ideas and make it more of an 'all-rounder' as well as implementing a web dashboard for (almost) all controls.
 
 <br>
 
