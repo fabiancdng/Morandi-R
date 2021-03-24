@@ -40,14 +40,36 @@ class Levling(commands.Cog):
     @commands.command()
     async def rank(self, ctx):
         user_xp = database.get_user_xp(ctx.guild.id, ctx.author.id)["xp"]
-        user_progress = int(str(user_xp ** (1/4))[2:4])
+        user_level = user_xp ** (1/4)
+        user_progress = int(str(user_level)[2:4])
+        
         bar_len = 20
         filled_len = int(round(bar_len * user_progress / float(100)))
         bar = '🟦' * filled_len + '⬜' * (bar_len - filled_len)
+        
+        user_progress_left = 1 - (user_progress / 100)
+        xp_left = user_xp / (user_level + 1) - user_progress_left
+        xp_left = round(xp_left * user_progress_left)
+
         await ctx.send(embed=discord.Embed(color=discord.Color.gold())
         .add_field(
+            name="Name",
+            value=ctx.author.display_name,
+            inline=True
+        )
+        .add_field(
+            name="Level",
+            value=round(user_level),
+            inline=True
+        )
+        .add_field(
+            name="XP (total)",
+            value=user_xp,
+            inline=True
+        )
+        .add_field(
             name="Progress",
-            value=bar,
+            value=f"{bar} {user_progress}%\n\nApproximately **{xp_left} XP** to next level.",
             inline=False
         ))
 
