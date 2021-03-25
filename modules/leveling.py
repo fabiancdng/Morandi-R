@@ -15,8 +15,7 @@ async def adjust_level(guild_id, user_id, user_xp, message_channel):
         database.user_level_up(guild_id, user_id)
         emb = discord.Embed(color=discord.Color.blue(), title="Level up! 🏆", description=f"Congrats, <@{user_id}>!!\nYou just advanced to level {level_new}.")
         await message_channel.send(embed=emb)
-        tm = time.strftime("%d/%m/%Y - %H:%M:%S")
-        print(f"> [{tm}] Leveling: User {user_id} in guild {guild_id} just advanced to level {level_new}.")
+        print(f"> [{database.get_date_time()}] Leveling: User {user_id} in guild {guild_id} just advanced to level {level_new}.")
         return True
     else:
         return False

@@ -12,6 +12,9 @@ db_args = {
     "cursorclass": pymysql.cursors.DictCursor
 }
 
+def get_date_time():
+    return time.strftime("%d/%m/%Y - %H:%M:%S")
+
 def setup_database():
     db = pymysql.connect(**db_args)
     cursor = db.cursor()
@@ -20,7 +23,7 @@ def setup_database():
     db.commit()
     cursor.close()
     db.close()
-    print(">>> Initialized MySQL database.")
+    print("> Initialized MySQL database.")
 
 def get_config(guild_id):
     db = pymysql.connect(**db_args)
@@ -32,7 +35,7 @@ def get_config(guild_id):
         db.close()
         return conf[0]
     else:
-        print(f"{guild_id}'s config has been created.")
+        print(f"> [{get_date_time()}] {guild_id}'s config has been created.")
         cursor.execute("INSERT INTO `configs` VALUES (0, %s, '.');", (guild_id))
         conf = {'id': db.insert_id(), 'guild_id': guild_id, 'prefix': '.'}
         db.commit()
@@ -43,21 +46,11 @@ def get_config(guild_id):
 def change_config(guild_id, item, value):
     db = pymysql.connect(**db_args)
     cursor = db.cursor()
-    cursor.execute("UPDATE `configs` SET `%s`=%s WHERE guild_id = '%s';", (item, value, guild_id))
-    conf = cursor
-    print(conf)
-    if len(conf) > 0:
-        cursor.close()
-        db.close()
-        return conf[0]
-    else:
-        print(f"{guild_id}'s config has been created.")
-        cursor.execute("INSERT INTO `configs` VALUES (0, %s, '.');", (guild_id))
-        conf = {'id': db.insert_id(), 'guild_id': guild_id, 'prefix': '.'}
-        db.commit()
-        cursor.close()
-        db.close()
-        return conf
+    cursor.execute(f"UPDATE configs SET `{item}` = %s WHERE guild_id = %s;", (value, guild_id))
+    print(f"> [{get_date_time()}] Changed '{item}' for guild '{guild_id}' to '{value}'.")
+    db.commit()
+    cursor.close()
+    db.close()
 
 def get_user_xp(guild_id, user_id):
     db = pymysql.connect(**db_args)
@@ -74,8 +67,7 @@ def get_user_xp(guild_id, user_id):
         user_xp = {"id": db.insert_id(), "guild_id": guild_id, "user_id": user_id, "xp": 0, "level": 0}
         cursor.close()
         db.close()
-        tm = time.strftime("%d/%m/%Y - %H:%M:%S")
-        print(f"> [{tm}] Leveling: Created user {user_id} in guild {guild_id}.")
+        print(f"> [{get_date_time()}] Leveling: Created user {user_id} in guild {guild_id}.")
         return user_xp
 
 def add_user_xp(guild_id, user_id, xp_to_add):
@@ -89,8 +81,7 @@ def add_user_xp(guild_id, user_id, xp_to_add):
     cursor.close()
     db.close()
 
-    tm = time.strftime("%d/%m/%Y - %H:%M:%S")
-    print(f"> [{tm}] Leveling: User {user_id} in guild {guild_id} earned {xp_to_add} XP.")
+    print(f"> [{get_date_time()}] Leveling: User {user_id} in guild {guild_id} earned {xp_to_add} XP.")
     return updated_xp
 
 def get_user_level(guild_id, user_id):
