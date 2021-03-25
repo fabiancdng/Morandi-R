@@ -19,7 +19,7 @@ class Bot(commands.Bot):
         self.ipc = ipc.Server(self, secret_key=config.ipc_key)
 
     async def on_ipc_ready(self):
-        print(">>> IPC server ready.")
+        print("> IPC server ready.")
 
     async def on_ipc_error(self, endpoint, error):
         print(endpoint, "raised", error)
@@ -29,12 +29,11 @@ bot = Bot(command_prefix=get_server_prefix)
 @bot.event
 async def on_ready():
     database.setup_database()
-    print(">>> Bot is now running.")
+    print("> Bot is now running.")
 
 @bot.event
 async def on_command(ctx):
-    tm = time.strftime("%d/%m/%Y - %H:%M:%S")
-    print(f">> [{tm}] Command '{ctx.command.name}' executed by {ctx.author.name} in guild '{ctx.guild}' ({ctx.guild.id}).")
+    print(f"> [{database.get_date_time()}] Command '{ctx.command.name}' executed by {ctx.author.name} in guild '{ctx.guild}' ({ctx.guild.id}).")
 
 for file in os.listdir("./modules"):
     if file.endswith(".py"):
