@@ -11,7 +11,7 @@ token = ""
 
 # A secret key used by the dashboard to communicate with the bot user
 # Can be a totally random string
-ipc_key = "D7TLEGcdu4zJCAv7F"
+ipc_key = ""
 
 # Discord OAuth credentials for handling dashboard logins
 # For the 'secret_key' just use any random string

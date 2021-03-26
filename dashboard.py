@@ -2,6 +2,7 @@ import config
 from quart import Quart, render_template, request, session, redirect, url_for
 from quart_discord import DiscordOAuth2Session
 from discord.ext import ipc
+from utils import database
 from globals import modules
 
 app = Quart(__name__, static_folder="web/public", template_folder="web/templates")
@@ -13,6 +14,8 @@ app.config["DISCORD_CLIENT_SECRET"] =  config.discord_client_secret
 app.config["DISCORD_REDIRECT_URI"] = config.discord_redirect_uri
 
 discord = DiscordOAuth2Session(app)
+
+##################  DASHBOARD ##################
 
 @app.route("/")
 async def home():
@@ -87,5 +90,29 @@ async def guild_dashboard_leveling(guild_id, module):
 async def logout():
     discord.revoke()
     return redirect("/")
+
+
+##################  API ##################
+
+@app.route("/api/settings/get/<guild_id>")
+async def api_get_setting(guild_id):
+    authorized = await discord.authorized
+    if authorized != True:
+        return "unauthorized"
+
+    config = database.get_config(int(guild_id))
+    return config
+
+@app.route("/api/settings/change/<guild_id>/<item>/<value>")
+async def api_change_setting(guild_id, item, value):
+    authorized = await discord.authorized
+    if authorized != True:
+        return "unauthorized"
+
+    callback = database.change_config(guild_id, item, value)
+    if callback == True:
+        return "done"
+    else:
+        return "error"
 
 app.run("127.0.0.1", 5000, debug=True)
