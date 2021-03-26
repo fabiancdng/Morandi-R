@@ -44,13 +44,17 @@ def get_config(guild_id):
         return conf
 
 def change_config(guild_id, item, value):
-    db = pymysql.connect(**db_args)
-    cursor = db.cursor()
-    cursor.execute(f"UPDATE configs SET `{item}` = %s WHERE guild_id = %s;", (value, guild_id))
-    print(f"> [{get_date_time()}] Changed '{item}' for guild '{guild_id}' to '{value}'.")
-    db.commit()
-    cursor.close()
-    db.close()
+    try:
+        db = pymysql.connect(**db_args)
+        cursor = db.cursor()
+        cursor.execute(f"UPDATE configs SET `{item}` = %s WHERE guild_id = %s;", (value, guild_id))
+        print(f"> [{get_date_time()}] Changed '{item}' for guild '{guild_id}' to '{value}'.")
+        db.commit()
+        cursor.close()
+        db.close()
+        return True
+    except:
+        return False
 
 def get_user_xp(guild_id, user_id):
     db = pymysql.connect(**db_args)
