@@ -45,11 +45,11 @@
 
         <div class="card" style="width: 60%;">
             <div class="card-content white-text">
-                <span class="card-title">Prefix <span class="badge red white-text">WIP</span></span>
+                <span class="card-title">Prefix</span>
                 <div class="input-field">
-                    <input id="prefix" type="text" class="validate white-text" maxlength="5">
+                    <input id="prefix" type="text" class="validate white-text" maxlength="5" disabled>
                     <label for="prefix">Prefix</label><br>
-                    <a class="waves-effect waves-light btn">save</a>
+                    <a class="waves-effect waves-light btn save-btn disabled" onclick="save('prefix');">save</a>
                 </div>
             </div>
         </div>
@@ -59,6 +59,33 @@
     <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
     <script>
         $(".dropdown-trigger").dropdown({ constrainWidth: false });
+
+        fetch("/api/settings/get/{{ guild.id }}")
+            .then(res => res.json())
+            .then(res => {
+                $("#prefix").val(res.prefix);
+                $("#prefix").prop("disabled", false);
+                $(".save-btn").removeClass("disabled")
+                $("#prefix").select();
+            });
+
+        function save(item) {
+            if(item == "prefix") {
+                var formData = new FormData();
+                formData.append("item", "prefix");
+                formData.append("value", $('#prefix').val());
+
+                fetch("/api/settings/change/{{ guild.id }}", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(res => res.text())
+                    .then(res => {
+                        if(res == "done") M.toast({html: 'SUCCESS! Prefix saved successfully.'});
+                        else M.toast({html: 'Sorry, an error occured.'});
+                    });
+            }
+        }
     </script>
 </body>
 </html>

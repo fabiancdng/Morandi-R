@@ -103,13 +103,14 @@ async def api_get_setting(guild_id):
     config = database.get_config(int(guild_id))
     return config
 
-@app.route("/api/settings/change/<guild_id>/<item>/<value>")
-async def api_change_setting(guild_id, item, value):
+@app.route("/api/settings/change/<guild_id>", methods=["POST"])
+async def api_change_setting(guild_id):
     authorized = await discord.authorized
     if authorized != True:
         return "unauthorized"
-
-    callback = database.change_config(guild_id, item, value)
+    
+    args = await request.form
+    callback = database.change_config(guild_id, args["item"], args["value"])
     if callback == True:
         return "done"
     else:
