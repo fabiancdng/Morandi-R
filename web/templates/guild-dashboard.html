@@ -1,40 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morandi Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <link rel="stylesheet" href="/public/materialize/css/materialize.min.css">
-    <link rel="stylesheet" href="/public/style.css">
-</head>
-<body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo" style="margin-left: 15px;">Morandi</a>
-            <ul id="nav-mobile" class="right">
-                <li>
-                    <a class="dropdown-trigger valign-wrapper" href="#!" data-target="userDropdown">
-                        <img class="circle" src="{{ user.avatar_url }}">
-                        <span>{{ user.username }} <i class="material-icons right">arrow_drop_down</i></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <ul id="userDropdown" class="dropdown-content" style="width: 100px !important;">
-        <li><a style="width: 200px !important;" href="/dashboard"><span class="material-icons">dns</span> My servers</a></li>
-        <li><a style="width: 200px !important;" href="/logout"><span class="material-icons">logout</span> Logout</a></li>
-    </ul>
-
-    <div class="center">
-        <h2>Morandi Dashboard</h2>
-        <h5>Click a module to see and change settings or use functions.</h5>
-    </div>
-
+{% extends "base.html" %}
+{% import "base.html" as base %}
+{% block username %} {{ user.name }} {% endblock %}
+{% block headline %} Morandi Dashboard {% endblock %}
+{% block description %} Click a module to see and change settings or use functions. {% endblock %}
+{% block user_avatar %} {{ user.avatar_url }} {% endblock %}
+{% block content %}
     <div class="row container">
         {% for module in modules %}
             <div class="col m4 center">
@@ -47,11 +17,4 @@
             </div>
         {% endfor %}
     </div>
-    
-    <script src="/public/jquery.min.js"></script>
-    <script src="/public/materialize/js/materialize.min.js"></script>
-    <script>
-        $(".dropdown-trigger").dropdown({constrainWidth: false});
-    </script>
-</body>
-</html>
+{% endblock %}
