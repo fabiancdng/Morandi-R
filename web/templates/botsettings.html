@@ -9,29 +9,7 @@
         <div class="input-field">
             <input id="prefix" type="text" class="validate white-text" maxlength="5" value="{{ config['prefix'] }}">
             <label for="prefix">Prefix</label><br>
-            <a class="waves-effect waves-light btn save-btn" onclick="save('prefix');">save</a>
+            <a class="waves-effect waves-light btn save-btn" onclick="save('{{ guild.id }}', 'prefix', $('#prefix').val());">save</a>
         </div>
     {% endcall %}
-
-    <script>
-        $(".dropdown-trigger").dropdown({ constrainWidth: false });
-
-        function save(item) {
-            if(item == "prefix") {
-                var formData = new FormData();
-                formData.append("item", "prefix");
-                formData.append("value", $('#prefix').val());
-
-                fetch("/api/settings/change/{{ guild.id }}", {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(res => res.text())
-                    .then(res => {
-                        if(res == "done") M.toast({html: 'SUCCESS! Prefix saved successfully.'});
-                        else M.toast({html: 'Sorry, an error occured.'});
-                    });
-            }
-        }
-    </script>
 {% endblock %}
