@@ -92,7 +92,19 @@ async def logout():
     return redirect("/")
 
 
-##################  API ##################
+##########################  API ##########################
+
+@app.route("/api/leaderboard/<guild_id>")
+async def api_get_leaderboard(guild_id):
+    data = {}
+    i = 0
+    users = database.get_leaderboard(guild_id, request.args["offset"], request.args["limit"])
+    for user in users:
+        display_name = await ipc_client.request("get_display_name_by_id", user_id=user["user_id"])
+        user["display_name"] = display_name
+        data[i] = user
+        i += 1
+    return data
 
 @app.route("/api/settings/get/<guild_id>")
 async def api_get_setting(guild_id):
