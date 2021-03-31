@@ -1,74 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morandi Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/public/materialize/css/materialize.min.css">
-    <link rel="stylesheet" href="/public/materialize/extras/noUiSlider/nouislider.css">
-    <link rel="stylesheet" href="/public/style.css">
-    <style>
-        h4 {
-            margin-top: 50px !important;
-        }
-    </style>
-</head>
-
-<body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo left" style="margin-left: 15px;">Morandi</a>
-            <ul id="nav-mobile" class="right">
-                <li>
-                    <a class="dropdown-trigger valign-wrapper" href="#!" data-target="userDropdown">
-                        <img class="circle" src="{{ user.avatar_url }}">
-                        <span>{{ user.username }} <i class="material-icons right">arrow_drop_down</i></span>
-                    </a>
-                </li>
-            </ul>
+{% extends "base.html" %}
+{% import "base.html" as base %}
+{% block username %} {{ user.name }} {% endblock %}
+{% block headline %} Leveling Settings {% endblock %}
+{% block description %} Change your preferences for the leveling system. {% endblock %}
+{% block user_avatar %} {{ user.avatar_url }} {% endblock %}
+{% block content %}
+    {% call base.card("Leveling system") %}
+        <div class="switch">
+            <label>
+                Disabled
+                <input type="checkbox">
+                <span class="lever"></span>
+                Enabled
+            </label>
         </div>
-    </nav>
+    {% endcall %}
+    
+    {% call base.card("XP rate") %}
+        <p>The bot will give users this amount of XP each minute they message.</p><br>
+        <div id="xp-slider"></div><br>
+        <a class="waves-effect waves-light btn">save</a>
+    {% endcall %}
+{% endblock %}
 
-    <ul id="userDropdown" class="dropdown-content" style="width: 100px !important;">
-        <li><a style="width: 200px !important;" href="/dashboard"><span class="material-icons">dns</span> My servers</a>
-        </li>
-        <li><a style="width: 200px !important;" href="/logout"><span class="material-icons">logout</span> Logout</a>
-        </li>
-    </ul>
-
-    <div class="flex-center">
-        <h2>Leveling</h2>
-        <h5>Change your preferences for the leveling system.</h5>
-
-        <div class="card" style="width: 60%;">
-            <div class="card-content white-text">
-                <span class="card-title">Leveling system <span class="badge red white-text">WIP</span></span>
-                <div class="switch">
-                    <label>
-                        Disabled
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        Enabled
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="card" style="width: 60%;">
-            <div class="card-content white-text">
-                <span class="card-title">XP rate <span class="badge red white-text">WIP</span></span>
-                <p>The bot will give users this amount of XP each minute they message.</p><br>
-                <div id="xp-slider"></div><br>
-                <a class="waves-effect waves-light btn">save</a>
-            </div>
-        </div>
-
-    <script src="/public/jquery.min.js"></script>
-    <script src="/public/materialize/js/materialize.min.js"></script>
-    <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
+{% block custom_scripts %}
     <script>
         $(".dropdown-trigger").dropdown({ constrainWidth: false });
         var slider = document.getElementById('xp-slider');
@@ -81,6 +36,4 @@
             }
         });
     </script>
-</body>
-
-</html>
+{% endblock %}

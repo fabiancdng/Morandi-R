@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/public/materialize/css/materialize.min.css">
     <link rel="stylesheet" href="/public/materialize/extras/noUiSlider/nouislider.css">
     <link rel="stylesheet" href="/public/style.css">
+    {% block custom_styles %}{% endblock %}
 </head>
 
 {% macro card(title) -%}
@@ -52,5 +53,6 @@
     <script src="/public/materialize/js/materialize.min.js"></script>
     <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
     <script src="/public/app.js"></script>
+    {% block custom_scripts %}{% endblock %}
 </body>
 </html>
