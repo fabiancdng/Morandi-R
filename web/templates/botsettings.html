@@ -1,73 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morandi Dashboard</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/public/materialize/css/materialize.min.css">
-    <link rel="stylesheet" href="/public/materialize/extras/noUiSlider/nouislider.css">
-    <link rel="stylesheet" href="/public/style.css">
-    <style>
-        h4 {
-            margin-top: 50px !important;
-        }
-    </style>
-</head>
-
-<body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo left" style="margin-left: 15px;">Morandi</a>
-            <ul id="nav-mobile" class="right">
-                <li>
-                    <a class="dropdown-trigger valign-wrapper" href="#!" data-target="userDropdown">
-                        <img class="circle" src="{{ user.avatar_url }}">
-                        <span>{{ user.username }} <i class="material-icons right">arrow_drop_down</i></span>
-                    </a>
-                </li>
-            </ul>
+{% extends "base.html" %}
+{% import "base.html" as base %}
+{% block username %} {{ user.name }} {% endblock %}
+{% block headline %} Bot Settings {% endblock %}
+{% block description %} Change your preferences for the bot's behavior. {% endblock %}
+{% block user_avatar %} {{ user.avatar_url }} {% endblock %}
+{% block content %}
+    {% call base.card("Prefix") %}
+        <div class="input-field">
+            <input id="prefix" type="text" class="validate white-text" maxlength="5" value="{{ config['prefix'] }}">
+            <label for="prefix">Prefix</label><br>
+            <a class="waves-effect waves-light btn save-btn" onclick="save('prefix');">save</a>
         </div>
-    </nav>
+    {% endcall %}
 
-    <ul id="userDropdown" class="dropdown-content" style="width: 100px !important;">
-        <li><a style="width: 200px !important;" href="/dashboard"><span class="material-icons">dns</span> My servers</a>
-        </li>
-        <li><a style="width: 200px !important;" href="/logout"><span class="material-icons">logout</span> Logout</a>
-        </li>
-    </ul>
-
-    <div class="flex-center">
-        <h2>Bot Settings</h2>
-        <h5>Change your preferences for the bot's behavior.</h5>
-
-        <div class="card" style="width: 60%;">
-            <div class="card-content white-text">
-                <span class="card-title">Prefix</span>
-                <div class="input-field">
-                    <input id="prefix" type="text" class="validate white-text" maxlength="5" disabled>
-                    <label for="prefix">Prefix</label><br>
-                    <a class="waves-effect waves-light btn save-btn disabled" onclick="save('prefix');">save</a>
-                </div>
-            </div>
-        </div>
-
-    <script src="/public/jquery.min.js"></script>
-    <script src="/public/materialize/js/materialize.min.js"></script>
-    <script src="/public/materialize/extras/noUiSlider/nouislider.min.js"></script>
     <script>
         $(".dropdown-trigger").dropdown({ constrainWidth: false });
-
-        fetch("/api/settings/get/{{ guild.id }}")
-            .then(res => res.json())
-            .then(res => {
-                $("#prefix").val(res.prefix);
-                $("#prefix").prop("disabled", false);
-                $(".save-btn").removeClass("disabled")
-                $("#prefix").select();
-            });
 
         function save(item) {
             if(item == "prefix") {
@@ -87,5 +34,4 @@
             }
         }
     </script>
-</body>
-</html>
+{% endblock %}
