@@ -109,3 +109,10 @@ def user_level_up(guild_id, user_id):
     db.close()
     return True
 
+def get_leaderboard(guild_id, offset, limit):
+    db = pymysql.connect(**db_args)
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM `leveling` LIMIT %s, %s", (int(offset), int(limit)))
+    cursor.close()
+    db.close()
+    return cursor.fetchall()

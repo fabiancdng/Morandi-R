@@ -24,7 +24,7 @@ class Bot(commands.Bot):
     async def on_ipc_error(self, endpoint, error):
         print(endpoint, "raised", error)
 
-bot = Bot(command_prefix=get_server_prefix)
+bot = Bot(command_prefix=get_server_prefix, intents=discord.Intents.all())
 
 @bot.event
 async def on_ready():

@@ -11,6 +11,10 @@ class IpcRoutes(commands.Cog):
             guild_ids.append(guild.id)
         return guild_ids
 
+    @ipc.server.route()
+    async def get_display_name_by_id(self, data):
+        display_name = self.bot.get_user(int(data.user_id)).display_name
+        return display_name
 
 def setup(bot):
     bot.add_cog(IpcRoutes(bot))
