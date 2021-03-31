@@ -82,7 +82,7 @@ async def guild_dashboard_leveling(guild_id, module):
 
     for guild in guilds:
         if guild.id == int(guild_id):
-            return await render_template(f"{module}.html", guild=guild, user=user)
+            return await render_template(f"{module}.html", guild=guild, user=user, config=database.get_config((guild.id)))
     
     return redirect("/")
 
