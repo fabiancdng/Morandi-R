@@ -54,14 +54,13 @@ class Covid(commands.Cog):
                     inline=False
                 ).add_field(
                     name="Source",
-                    value=f"_Source: [covid19api](https://covid19api.com)_\n_Timestamp: {data['Date']}_"
+                    value=f"Source: _[covid19api](https://covid19api.com)_\nTimestamp: _{data['Date']}_"
                 )
 
                 await ctx.send(embed=embed)
-            else:
-                continue
+                return
 
-        await ctx.send(embed=discord.Embed(color=discord.Color().red(), description="❌ Country not found."))
+        await ctx.send(embed=discord.Embed(color=discord.Color.red(), description="❌ Country not found."))
     
 def setup(bot):
     bot.add_cog(Covid(bot))
