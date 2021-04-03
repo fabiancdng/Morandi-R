@@ -20,18 +20,18 @@ Morandi can be used in unlimited servers concurrently.
 
 ![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/guild-dashboard.png?raw=true)
 
-### **[WIP]** Web dashboard
+### Web dashboard
 
 ![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/dashboard.png?raw=true)
 
-* Configuration of the bot is made thorugh a web interface instead of a 'config' commands or something
+* Configuration of the bot is made using a web interface instead of a 'config' command or something
 * Leadberboard of the XP and level system
 
 ### XP and leveling system
 * A customizable amount of XP is given to a user every minute they chat.
 * With a certain (with each level increasing) amount of XP the user levels up.
-* **[WIP]** Role rewards for specific levels
-* **[WIP]** rank - command for getting a user's XP and level count as well as their position on the leaderboard
+* Role rewards for specific levels
+* rank - command for getting a user's XP and level count as well as their position on the leaderboard
 ### Other useful commands like:
 * **clear [amount of messages]** - deletes messages in a channel
 * **ping** - checks the bot's latency
@@ -55,16 +55,16 @@ Hence, _**I do not recommend using Morandi in a genuine guild yet!**_
 <br>
 
 ## Credits / Dependencies
-Morandi uses some third party libraries:  
+
 ### Bot
 * [discord.py](https://github.com/Rapptz/discord.py)
 * [discord-ext-ipc](https://github.com/Ext-Creators/discord-ext-ipc)
 * [pymysql](https://github.com/PyMySQL/PyMySQL)
 ### Web Dashoard
-* [Materialize](https://materializecss.com/)
-* [jQuery](https://jquery.com/)
 * [Quart](https://github.com/xutaoding/quart)
 * [Quart-Discord](https://github.com/jnawk/Quart-Discord)
+* [Materialize](https://materializecss.com/)
+* [jQuery](https://jquery.com/)
 
 <br>
 
