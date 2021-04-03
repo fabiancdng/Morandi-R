@@ -1,6 +1,7 @@
 import discord
 import random
 import time
+from app import get_server_prefix
 from utils import database
 from discord.ext import commands
 
@@ -31,6 +32,10 @@ class Levling(commands.Cog):
             return
         
         if message.guild is None:
+            return
+        
+        prefix = get_server_prefix(self.bot, message)
+        if message.content.startswith(prefix):
             return
         
         upated_xp = await add_xp(message.guild.id, message.author.id)
