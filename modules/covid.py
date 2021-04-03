@@ -19,7 +19,7 @@ class Covid(commands.Cog):
                     color=discord.Color.orange(),
                     title=f"Current Covid-19 data for **{data['Country']}**"
                 ).add_field(
-                    name="Disclamer",
+                    name="Disclaimer",
                     value="We are not responsible for the data below nor do we provide any kind of warranty or liability for it. The data's origin is [covid19api](https://covid19api.com/). It is used by a lot of projects and according to their own statements, the data they serve is from [Johns Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19). Please do your own research and don't rely on the data in this message.",
                     inline=False
                 ).add_field(
@@ -50,7 +50,7 @@ class Covid(commands.Cog):
                     inline=False
                 ).add_field(
                     name="What does '0' mean?",
-                    value="The 0 means that the data for this query isn't in yet, try again in a few hours.\n\n",
+                    value="0 means that the data for this query isn't in yet. Try again in a few hours.\n\n",
                     inline=False
                 ).add_field(
                     name="Source",
