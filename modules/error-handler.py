@@ -14,6 +14,8 @@ class ErrorHandler(commands.Cog):
                 color=discord.Color.red(),
                 description="❌ This command is only supported on servers."
             ))
+        elif isinstance(error, commands.CommandNotFound):
+            return
         else:
             await ctx.send(embed=discord.Embed(
                 title="An error occured during the command execution:",
