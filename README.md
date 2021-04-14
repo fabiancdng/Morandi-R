@@ -54,7 +54,7 @@ Hence, _**I do not recommend using Morandi in a genuine guild yet!**_
 
 <br>
 
-## Credits / Dependencies
+## Third party dependencies
 
 ### Bot
 * [discord.py](https://github.com/Rapptz/discord.py)
@@ -64,7 +64,6 @@ Hence, _**I do not recommend using Morandi in a genuine guild yet!**_
 * [Quart](https://github.com/xutaoding/quart)
 * [Quart-Discord](https://github.com/jnawk/Quart-Discord)
 * [Materialize](https://materializecss.com/)
-* [jQuery](https://jquery.com/)
 
 <br>
 

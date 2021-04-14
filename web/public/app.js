@@ -1,4 +1,7 @@
-$(".dropdown-trigger").dropdown({ constrainWidth: false });
+document.addEventListener('DOMContentLoaded', () => {
+    var dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(dropdownTriggers, { constrainWidth: false });
+});
 
 function save(guild_id, item, value) {
     var formData = new FormData();
