@@ -15,9 +15,14 @@ This project is based on the idea [this repository](https://github.com/fabiancdn
 
 <br>
 
+## Why am I not working on this project anymore?
+I originally took a break from this project to start learning the programming language 'Go'. As I participated in a Hackathon around that time, I started getting into [discordgo](https://github.com/bwmarrin/discordgo). I discovered that Go has a major advantage over Python when working on a project like this and that is its incredibly good built-in concurrency. I am currently working on a new bot written in Go that uses the built-in concurrency and channels for communicating between API and Bot. I'm not saying I'll never work on this project again. But it is on hold.
+
+<br>
+
 ## Features
 ### Multi-server support
-Morandi can be used in unlimited servers concurrently.
+Morandi can be used in multiple servers concurrently.
 
 ![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/guild-dashboard.png?raw=true)
 
@@ -25,7 +30,7 @@ Morandi can be used in unlimited servers concurrently.
 
 ![Image broken](https://github.com/fabiancdng/Morandi-R/blob/master/assets/dashboard.png?raw=true)
 
-* Configuration of the bot is made using a web interface instead of a 'config' command or something
+* Configuration of the bot can be done using a web interface instead of a 'config' command or something
 * Leadberboard of the XP and level system
 
 ### XP and leveling system
@@ -36,22 +41,6 @@ Morandi can be used in unlimited servers concurrently.
 ### Other useful commands like:
 * **clear [amount of messages]** - deletes messages in a channel
 * **ping** - checks the bot's latency
-
-<br>
-
-## How to set up Morandi
-Morandi hasn't reached its first stable release yet.
-
-Hence, _**I do not recommend using Morandi in a genuine guild yet!**_
-
-**You can host your own instance of Morandi by following the [self-hosting guide](https://github.com/fabiancdng/Morandi-R/wiki/Self-hosting).**
-
-<br>
-
-## Contributing
-* If you'd like to help develop Morandi, I highly encourage you to do so!
-* Contributions can be made using Pull requests.
-* If you have any suggestions / feature requests, you may use the 'Issues' tab to submit them.
 
 <br>
 
